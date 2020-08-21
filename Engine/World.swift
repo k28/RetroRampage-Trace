@@ -23,5 +23,12 @@ public extension World {
         player.position += player.velocity * timeStep
         player.position.x.formTruncatingRemainder(dividingBy: size.x)
         player.position.y.formTruncatingRemainder(dividingBy: size.y)
+        if player.position.x < 0 {
+            player.position.x = size.x + player.position.x
+        }
+        if player.position.y < 0 {
+            player.position.y = size.y + player.position.y
+        }
+
     }
 }
