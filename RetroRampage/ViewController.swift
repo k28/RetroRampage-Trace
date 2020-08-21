@@ -11,15 +11,15 @@ import Engine
 
 class ViewController: UIViewController {
     private let imageView = UIImageView()
+    private var world = World()
+    private var lastFrameTime = CACurrentMediaTime()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpImageView()
         
-        var bitmap = Bitmap(width: 8, height: 8, color: .white)
-        bitmap[0, 0] = .blue
-        
-        imageView.image = UIImage(bitmap: bitmap)
+        let displayLink = CADisplayLink(target: self, selector: #selector(update(_:)))
+        displayLink.add(to: .main, forMode: .common)
     }
 
     func setUpImageView() {
@@ -32,6 +32,18 @@ class ViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         imageView.layer.magnificationFilter = .nearest
+    }
+    
+    @objc func update(_ displayLink: CADisplayLink) {
+        let timeStep = displayLink.timestamp - lastFrameTime
+        world.update(timeStep: timeStep)
+        lastFrameTime = displayLink.timestamp
+        
+        let size = Int(min(imageView.bounds.width, imageView.bounds.height))
+        var renderer = Renderer(width: size, height: size)
+        renderer.draw(world)
+        
+        imageView.image = UIImage(bitmap: renderer.bitmap)
     }
 
 }
