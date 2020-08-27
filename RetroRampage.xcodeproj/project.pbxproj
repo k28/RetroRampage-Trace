@@ -12,6 +12,11 @@
 		E52CA75424F06E0F008A8BF0 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75324F06E0F008A8BF0 /* Player.swift */; };
 		E52CA75624F074D3008A8BF0 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75524F074D3008A8BF0 /* World.swift */; };
 		E52CA75824F07655008A8BF0 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75724F07655008A8BF0 /* Rect.swift */; };
+		E52CA75A24F1CAE7008A8BF0 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75924F1CAE7008A8BF0 /* Tile.swift */; };
+		E52CA75C24F1CB22008A8BF0 /* Tilemap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75B24F1CB22008A8BF0 /* Tilemap.swift */; };
+		E52CA75E24F1CEDF008A8BF0 /* Map.json in Resources */ = {isa = PBXBuildFile; fileRef = E52CA75D24F1CEDF008A8BF0 /* Map.json */; };
+		E52CA76024F1D4FA008A8BF0 /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75F24F1D4FA008A8BF0 /* Thing.swift */; };
+		E52CA76224F202CA008A8BF0 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76124F202CA008A8BF0 /* Input.swift */; };
 		E5FBF66D24EEB9EF00AAC46D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF66C24EEB9EF00AAC46D /* AppDelegate.swift */; };
 		E5FBF66F24EEB9EF00AAC46D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF66E24EEB9EF00AAC46D /* SceneDelegate.swift */; };
 		E5FBF67124EEB9EF00AAC46D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF67024EEB9EF00AAC46D /* ViewController.swift */; };
@@ -55,6 +60,11 @@
 		E52CA75324F06E0F008A8BF0 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E52CA75524F074D3008A8BF0 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		E52CA75724F07655008A8BF0 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		E52CA75924F1CAE7008A8BF0 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		E52CA75B24F1CB22008A8BF0 /* Tilemap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilemap.swift; sourceTree = "<group>"; };
+		E52CA75D24F1CEDF008A8BF0 /* Map.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Map.json; sourceTree = "<group>"; };
+		E52CA75F24F1D4FA008A8BF0 /* Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thing.swift; sourceTree = "<group>"; };
+		E52CA76124F202CA008A8BF0 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		E5FBF66924EEB9EF00AAC46D /* RetroRampage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroRampage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5FBF66C24EEB9EF00AAC46D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5FBF66E24EEB9EF00AAC46D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +128,7 @@
 				E5FBF67724EEB9EF00AAC46D /* LaunchScreen.storyboard */,
 				E5FBF67A24EEB9EF00AAC46D /* Info.plist */,
 				E5FBF69624EF1B2A00AAC46D /* UIImage+Bitmap.swift */,
+				E52CA75D24F1CEDF008A8BF0 /* Map.json */,
 			);
 			path = RetroRampage;
 			sourceTree = "<group>";
@@ -133,6 +144,10 @@
 				E52CA75324F06E0F008A8BF0 /* Player.swift */,
 				E52CA75524F074D3008A8BF0 /* World.swift */,
 				E52CA75724F07655008A8BF0 /* Rect.swift */,
+				E52CA75924F1CAE7008A8BF0 /* Tile.swift */,
+				E52CA75B24F1CB22008A8BF0 /* Tilemap.swift */,
+				E52CA75F24F1D4FA008A8BF0 /* Thing.swift */,
+				E52CA76124F202CA008A8BF0 /* Input.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -232,6 +247,7 @@
 			files = (
 				E5FBF67924EEB9EF00AAC46D /* LaunchScreen.storyboard in Resources */,
 				E5FBF67624EEB9EF00AAC46D /* Assets.xcassets in Resources */,
+				E52CA75E24F1CEDF008A8BF0 /* Map.json in Resources */,
 				E5FBF67424EEB9EF00AAC46D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,9 +280,13 @@
 				E52CA75824F07655008A8BF0 /* Rect.swift in Sources */,
 				E52CA75624F074D3008A8BF0 /* World.swift in Sources */,
 				E5FBF69524EEBDBC00AAC46D /* Bitmap.swift in Sources */,
+				E52CA76224F202CA008A8BF0 /* Input.swift in Sources */,
+				E52CA75A24F1CAE7008A8BF0 /* Tile.swift in Sources */,
 				E52CA75024EF2257008A8BF0 /* Renderer.swift in Sources */,
 				E52CA75224F06B58008A8BF0 /* Vector.swift in Sources */,
 				E52CA75424F06E0F008A8BF0 /* Player.swift in Sources */,
+				E52CA75C24F1CB22008A8BF0 /* Tilemap.swift in Sources */,
+				E52CA76024F1D4FA008A8BF0 /* Thing.swift in Sources */,
 				E5FBF69324EEBC9600AAC46D /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
