@@ -18,6 +18,12 @@ public struct Vector {
 }
 
 public extension Vector {
+    
+    /// 直交するVectorを返す
+    var orthogonal: Vector {
+        return Vector(x: -y, y: x)
+    }
+    
     static func + (lhs: Vector, rhs: Vector) -> Vector {
         return Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }

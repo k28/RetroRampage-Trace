@@ -1,0 +1,18 @@
+//
+//  Ray.swift
+//  Engine
+//
+//  Created by K.Hatano on 2020/08/29.
+//  Copyright © 2020 K.Hatano. All rights reserved.
+//
+
+import Foundation
+
+public struct Ray {
+    public var origin, direction: Vector
+    
+    public init(origin: Vector, direction: Vector) {
+        self.origin = origin
+        self.direction = direction
+    }
+}

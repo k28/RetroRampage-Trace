@@ -17,6 +17,8 @@
 		E52CA75E24F1CEDF008A8BF0 /* Map.json in Resources */ = {isa = PBXBuildFile; fileRef = E52CA75D24F1CEDF008A8BF0 /* Map.json */; };
 		E52CA76024F1D4FA008A8BF0 /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75F24F1D4FA008A8BF0 /* Thing.swift */; };
 		E52CA76224F202CA008A8BF0 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76124F202CA008A8BF0 /* Input.swift */; };
+		E52CA76424F9B70A008A8BF0 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76324F9B70A008A8BF0 /* Ray.swift */; };
+		E52CA76624FAF945008A8BF0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76524FAF945008A8BF0 /* Rotation.swift */; };
 		E5FBF66D24EEB9EF00AAC46D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF66C24EEB9EF00AAC46D /* AppDelegate.swift */; };
 		E5FBF66F24EEB9EF00AAC46D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF66E24EEB9EF00AAC46D /* SceneDelegate.swift */; };
 		E5FBF67124EEB9EF00AAC46D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF67024EEB9EF00AAC46D /* ViewController.swift */; };
@@ -65,6 +67,8 @@
 		E52CA75D24F1CEDF008A8BF0 /* Map.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Map.json; sourceTree = "<group>"; };
 		E52CA75F24F1D4FA008A8BF0 /* Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thing.swift; sourceTree = "<group>"; };
 		E52CA76124F202CA008A8BF0 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		E52CA76324F9B70A008A8BF0 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
+		E52CA76524FAF945008A8BF0 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		E5FBF66924EEB9EF00AAC46D /* RetroRampage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroRampage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5FBF66C24EEB9EF00AAC46D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5FBF66E24EEB9EF00AAC46D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				E52CA75B24F1CB22008A8BF0 /* Tilemap.swift */,
 				E52CA75F24F1D4FA008A8BF0 /* Thing.swift */,
 				E52CA76124F202CA008A8BF0 /* Input.swift */,
+				E52CA76324F9B70A008A8BF0 /* Ray.swift */,
+				E52CA76524FAF945008A8BF0 /* Rotation.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -285,6 +291,8 @@
 				E52CA75024EF2257008A8BF0 /* Renderer.swift in Sources */,
 				E52CA75224F06B58008A8BF0 /* Vector.swift in Sources */,
 				E52CA75424F06E0F008A8BF0 /* Player.swift in Sources */,
+				E52CA76624FAF945008A8BF0 /* Rotation.swift in Sources */,
+				E52CA76424F9B70A008A8BF0 /* Ray.swift in Sources */,
 				E52CA75C24F1CB22008A8BF0 /* Tilemap.swift in Sources */,
 				E52CA76024F1D4FA008A8BF0 /* Thing.swift in Sources */,
 				E5FBF69324EEBC9600AAC46D /* Color.swift in Sources */,

@@ -37,7 +37,13 @@ public extension World {
     }
     
     mutating func update(timeStep: Double, input: Input) {
-        player.velocity = input.velocity * player.speed
+//        let length = input.velocity.length
+//        if length > 0 {
+//            player.direction = input.velocity / length
+//        }
+//        player.velocity = input.velocity * player.speed
+        player.direction = player.direction.rotated(by: input.rotation)
+        player.velocity = player.direction * input.speed * player.speed
         player.position += player.velocity * timeStep
         while let intersection = player.intersection(with: map) {
             player.position -= intersection

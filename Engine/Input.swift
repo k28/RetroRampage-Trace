@@ -9,9 +9,11 @@
 import Foundation
 
 public struct Input {
-    public var velocity: Vector
+    public var speed: Double
+    public var rotation: Rotation
     
-    public init(velocity: Vector) {
-        self.velocity = velocity
+    public init(speed: Double, rotation: Rotation) {
+        self.speed = speed
+        self.rotation = rotation
     }
 }
