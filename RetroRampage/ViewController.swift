@@ -54,8 +54,8 @@ class ViewController: UIViewController {
         }
         lastFrameTime = displayLink.timestamp
         
-        let size = Int(min(imageView.bounds.width, imageView.bounds.height))
-        var renderer = Renderer(width: size, height: size)
+        let width = Int(imageView.bounds.width), height = Int(imageView.bounds.height)
+        var renderer = Renderer(width: width, height: height)
         renderer.draw(world)
         
         imageView.image = UIImage(bitmap: renderer.bitmap)
