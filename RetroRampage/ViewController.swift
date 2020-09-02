@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     private var lastFrameTime = CACurrentMediaTime()
     private let maximumTimeStep: Double = 1/20
     private let worldTimeStep: Double = 1/120
+    private let textures = loadTextures()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +56,7 @@ class ViewController: UIViewController {
         lastFrameTime = displayLink.timestamp
         
         let width = Int(imageView.bounds.width), height = Int(imageView.bounds.height)
-        var renderer = Renderer(width: width, height: height)
+        var renderer = Renderer(width: width, height: height, textures: textures)
         renderer.draw(world)
         
         imageView.image = UIImage(bitmap: renderer.bitmap)
@@ -83,5 +84,11 @@ private func loadMap() -> Tilemap {
     let jsonURL = Bundle.main.url(forResource: "Map", withExtension: "json")!
     let jsonData = try! Data(contentsOf: jsonURL)
     return try! JSONDecoder().decode(Tilemap.self, from: jsonData)
+}
+
+private func loadTextures() -> Textures {
+    return Textures(loader: { name in
+        Bitmap(image: UIImage(named: name)!)!
+    })
 }
 
