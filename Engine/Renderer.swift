@@ -26,6 +26,14 @@ public extension Renderer {
         let viewPlane = world.player.direction.orthogonal * viewWidth
         let viewCenter = world.player.position + world.player.direction * focalLength
         let viewStart = viewCenter - viewPlane / 2
+
+        // Sort sprites by distance
+        var spritesByDistance: [(distance: Double, sprite: Billboard)] = []
+        for sprite in world.sprites {
+            let spriteDistance = (sprite.start - world.player.position).length
+            spritesByDistance.append((distance: spriteDistance, sprite: sprite))
+        }
+        spritesByDistance.sort { $0.distance > $1.distance }    // 後ろの物から描画するために遠い順にソートする
         
         // Cast rays
         let columns = bitmap.width
@@ -34,9 +42,9 @@ public extension Renderer {
         for x in 0 ..< columns {
             let rayDirection = columnPosition - world.player.position
             let viewPlaneDistance = rayDirection.length
-            let ray = Ray(origin: world.player.position, direction: rayDirection / viewPlaneDistance)
+            let ray = Ray(origin: world.player.position, direction: rayDirection / viewPlaneDistance)   // このループで注目するRay
             let end = world.map.hitTest(ray)
-            let wallDistance = (end - ray.origin).length
+            let wallDistance = (end - ray.origin).length    // 壁までの距離
             
             // Draw wall
             let wallHeight = 1.0
@@ -78,6 +86,26 @@ public extension Renderer {
                 bitmap[x, y] = floorTexture[normalized: textureX, textureY]
                 bitmap[x, bitmap.height - 1 - y] = ceilingTexture[normalized: textureX, textureY]
             }
+            
+            // Draw splites
+            
+            for (_, sprite) in spritesByDistance {
+                guard let hit = sprite.hitTest(ray) else {
+                    continue
+                }
+                let spriteDistance = (hit - ray.origin).length
+                if spriteDistance > wallDistance {
+                    continue
+                }
+                let perpendicular = spriteDistance / distanceRatio
+                let height = wallHeight / perpendicular * Double(bitmap.height)
+                let spriteX = (hit - sprite.start).length / sprite.length
+                let spriteTexture = textures[.monster]
+                let textureX = min(Int(spriteX * Double(spriteTexture.width)), spriteTexture.width - 1)
+                let start = Vector(x: Double(x), y: (Double(bitmap.height) - height) / 2 + 0.001)
+                bitmap.drawColumn(textureX, of: spriteTexture, at: start, height: height)
+            }
+            
             columnPosition += step
         }
     }
@@ -127,9 +155,24 @@ public extension Renderer {
             let rayDirection = columnPosition - world.player.position
             let viewPlaneDistance = rayDirection.length
             let ray = Ray(origin: world.player.position, direction: rayDirection / viewPlaneDistance)
-            let end = world.map.hitTest(ray)
+            var end = world.map.hitTest(ray)
+            for splite in world.sprites {
+                guard let hit = splite.hitTest(ray) else {
+                    continue
+                }
+                let spliteDistance = (hit - ray.origin).length
+                if spliteDistance > (end - ray.origin).length {
+                    continue
+                }
+                end = hit
+            }
             bitmap.drawLine(from: ray.origin * scale, to: end * scale, color: .green)
             columnPosition += step
+        }
+        
+        // Draw sprites
+        for line in world.sprites {
+            bitmap.drawLine(from: line.start * scale, to: line.end * scale, color: .green)
         }
     }
 }

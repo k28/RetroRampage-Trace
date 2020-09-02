@@ -58,7 +58,8 @@ class ViewController: UIViewController {
         let width = Int(imageView.bounds.width), height = Int(imageView.bounds.height)
         var renderer = Renderer(width: width, height: height, textures: textures)
         renderer.draw(world)
-        
+        // renderer.draw2D(world)
+
         imageView.image = UIImage(bitmap: renderer.bitmap)
     }
 
