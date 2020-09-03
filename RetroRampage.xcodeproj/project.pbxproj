@@ -22,6 +22,8 @@
 		E52CA76824FD9CA9008A8BF0 /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76724FD9CA9008A8BF0 /* Textures.swift */; };
 		E52CA76A24FFD228008A8BF0 /* Moster.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76924FFD228008A8BF0 /* Moster.swift */; };
 		E52CA76C24FFD526008A8BF0 /* Billboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76B24FFD526008A8BF0 /* Billboard.swift */; };
+		E52CA76E25012879008A8BF0 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA76D25012879008A8BF0 /* Actor.swift */; };
+		E5D40B1525019410001E84AD /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D40B1425019410001E84AD /* Animation.swift */; };
 		E5FBF66D24EEB9EF00AAC46D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF66C24EEB9EF00AAC46D /* AppDelegate.swift */; };
 		E5FBF66F24EEB9EF00AAC46D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF66E24EEB9EF00AAC46D /* SceneDelegate.swift */; };
 		E5FBF67124EEB9EF00AAC46D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBF67024EEB9EF00AAC46D /* ViewController.swift */; };
@@ -75,6 +77,8 @@
 		E52CA76724FD9CA9008A8BF0 /* Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textures.swift; sourceTree = "<group>"; };
 		E52CA76924FFD228008A8BF0 /* Moster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moster.swift; sourceTree = "<group>"; };
 		E52CA76B24FFD526008A8BF0 /* Billboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Billboard.swift; sourceTree = "<group>"; };
+		E52CA76D25012879008A8BF0 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
+		E5D40B1425019410001E84AD /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		E5FBF66924EEB9EF00AAC46D /* RetroRampage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetroRampage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5FBF66C24EEB9EF00AAC46D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5FBF66E24EEB9EF00AAC46D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 		E5FBF68624EEBA2800AAC46D /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				E52CA76D25012879008A8BF0 /* Actor.swift */,
+				E5D40B1425019410001E84AD /* Animation.swift */,
 				E52CA76B24FFD526008A8BF0 /* Billboard.swift */,
 				E5FBF69424EEBDBC00AAC46D /* Bitmap.swift */,
 				E5FBF69224EEBC9600AAC46D /* Color.swift */,
@@ -297,6 +303,7 @@
 				E5FBF69524EEBDBC00AAC46D /* Bitmap.swift in Sources */,
 				E52CA76224F202CA008A8BF0 /* Input.swift in Sources */,
 				E52CA75A24F1CAE7008A8BF0 /* Tile.swift in Sources */,
+				E52CA76E25012879008A8BF0 /* Actor.swift in Sources */,
 				E52CA76C24FFD526008A8BF0 /* Billboard.swift in Sources */,
 				E52CA75024EF2257008A8BF0 /* Renderer.swift in Sources */,
 				E52CA75224F06B58008A8BF0 /* Vector.swift in Sources */,
@@ -307,6 +314,7 @@
 				E52CA76424F9B70A008A8BF0 /* Ray.swift in Sources */,
 				E52CA75C24F1CB22008A8BF0 /* Tilemap.swift in Sources */,
 				E52CA76024F1D4FA008A8BF0 /* Thing.swift in Sources */,
+				E5D40B1525019410001E84AD /* Animation.swift in Sources */,
 				E5FBF69324EEBC9600AAC46D /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

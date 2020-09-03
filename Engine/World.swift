@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// ゲームの世界を管理するクラス
 public struct World {
     public let map: Tilemap
     public var player: Player!
@@ -40,10 +41,47 @@ public extension World {
         return map.size
     }
     
+    /// 状態を更新する
+    /// - Parameters:
+    ///   - timeStep: 時間の経過
+    ///   - input: 操作の入力
     mutating func update(timeStep: Double, input: Input) {
         player.direction = player.direction.rotated(by: input.rotation)
         player.velocity = player.direction * input.speed * player.speed
         player.position += player.velocity * timeStep
+        
+        // Update monsters
+        for i in 0 ..< monsters.count {
+            var monster = monsters[i]
+            monster.update(in: self)
+            monster.position += monster.velocity * timeStep
+            monster.animation.time += timeStep
+            monsters[i] = monster
+        }
+
+        // Handle collisions
+        for i in monsters.indices {
+            var monster = monsters[i]
+            if let intersection = player.intersection(with: monster) {
+                player.position -= intersection / 2
+                monster.position += intersection / 2
+            }
+            
+            for j in i + 1 ..< monsters.count {
+                if let intersection = monster.intersection(with: monsters[j]) {
+                    monster.position -= intersection / 2
+                    monsters[j].position += intersection / 2
+                }
+            }
+            
+            // Monsterが壁にめり込まないようにする
+            while let intersection = monster.intersection(with: map) {
+                monster.position -= intersection
+            }
+            
+            monsters[i] = monster
+        }
+
         while let intersection = player.intersection(with: map) {
             player.position -= intersection
         }
@@ -55,7 +93,8 @@ public extension World {
             Billboard(
                 start: monster.position - spritePlane / 2,
                 direction: spritePlane,
-                length: 1
+                length: 1,
+                texture: monster.animation.texture
             )
         }
     }
