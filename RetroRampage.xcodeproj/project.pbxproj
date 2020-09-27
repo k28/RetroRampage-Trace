@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E527B659251FF2CB00A514FA /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E527B658251FF2CB00A514FA /* Effect.swift */; };
+		E527B65B25201B5400A514FA /* Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E527B65A25201B5400A514FA /* Easing.swift */; };
 		E52CA75024EF2257008A8BF0 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA74F24EF2257008A8BF0 /* Renderer.swift */; };
 		E52CA75224F06B58008A8BF0 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75124F06B58008A8BF0 /* Vector.swift */; };
 		E52CA75424F06E0F008A8BF0 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75324F06E0F008A8BF0 /* Player.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E527B658251FF2CB00A514FA /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		E527B65A25201B5400A514FA /* Easing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Easing.swift; sourceTree = "<group>"; };
 		E52CA74F24EF2257008A8BF0 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		E52CA75124F06B58008A8BF0 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		E52CA75324F06E0F008A8BF0 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				E52CA76B24FFD526008A8BF0 /* Billboard.swift */,
 				E5FBF69424EEBDBC00AAC46D /* Bitmap.swift */,
 				E5FBF69224EEBC9600AAC46D /* Color.swift */,
+				E527B65A25201B5400A514FA /* Easing.swift */,
+				E527B658251FF2CB00A514FA /* Effect.swift */,
 				E52CA76124F202CA008A8BF0 /* Input.swift */,
 				E52CA76924FFD228008A8BF0 /* Moster.swift */,
 				E52CA75324F06E0F008A8BF0 /* Player.swift */,
@@ -303,10 +309,12 @@
 				E5FBF69524EEBDBC00AAC46D /* Bitmap.swift in Sources */,
 				E52CA76224F202CA008A8BF0 /* Input.swift in Sources */,
 				E52CA75A24F1CAE7008A8BF0 /* Tile.swift in Sources */,
+				E527B659251FF2CB00A514FA /* Effect.swift in Sources */,
 				E52CA76E25012879008A8BF0 /* Actor.swift in Sources */,
 				E52CA76C24FFD526008A8BF0 /* Billboard.swift in Sources */,
 				E52CA75024EF2257008A8BF0 /* Renderer.swift in Sources */,
 				E52CA75224F06B58008A8BF0 /* Vector.swift in Sources */,
+				E527B65B25201B5400A514FA /* Easing.swift in Sources */,
 				E52CA76824FD9CA9008A8BF0 /* Textures.swift in Sources */,
 				E52CA75424F06E0F008A8BF0 /* Player.swift in Sources */,
 				E52CA76A24FFD228008A8BF0 /* Moster.swift in Sources */,

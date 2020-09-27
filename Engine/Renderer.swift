@@ -11,6 +11,7 @@ import Foundation
 public struct Renderer {
     public private(set) var bitmap: Bitmap
     private let textures: Textures
+    private let fizzle = (0 ..< 10000).shuffled()
     
     public init(width: Int, height: Int, textures: Textures) {
         self.bitmap = Bitmap(width: width, height: height, color: .black)
@@ -106,6 +107,28 @@ public extension Renderer {
             }
             
             columnPosition += step
+        }
+        
+        // Effects
+        for effect in world.effects {
+            switch effect.type {
+            case .fadeIn:
+                bitmap.tint(with: effect.color, opacity: 1 - effect.progress)
+            case .fadeOut:
+                bitmap.tint(with: effect.color, opacity: effect.progress)
+            case .fizzleOut:
+                let threshold = Int(effect.progress * Double(fizzle.count))
+                for y in 0 ..< bitmap.height {
+                    for x in 0 ..< bitmap.width {
+                        let granularity = 4
+                        let index = y / granularity * bitmap.width + x / granularity
+                        let fizzledIndex = fizzle[index % fizzle.count]
+                        if fizzledIndex <= threshold {
+                            bitmap[x, y] = effect.color
+                        }
+                    }
+                }
+            }
         }
     }
     
