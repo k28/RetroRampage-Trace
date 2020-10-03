@@ -66,9 +66,11 @@ public extension World {
         
         // Update player
         if player.isDead == false {
-            player.direction = player.direction.rotated(by: input.rotation)
-            player.velocity = player.direction * input.speed * player.speed
+            var player = self.player!   // playerのupdateメソッドでworldを渡す為に、playerをコピーしてそれを使う
+            player.animation.time += timeStep
+            player.update(with: input, in: &self)
             player.position += player.velocity * timeStep
+            self.player = player
         } else if effects.isEmpty {
             reset()
             effects.append(Effect(type: .fadeIn, color: .red, duration: 0.5))
@@ -78,9 +80,9 @@ public extension World {
         // Update monsters
         for i in 0 ..< monsters.count {
             var monster = monsters[i]
+            monster.animation.time += timeStep
             monster.update(in: &self)
             monster.position += monster.velocity * timeStep
-            monster.animation.time += timeStep
             monsters[i] = monster
         }
 
@@ -113,15 +115,8 @@ public extension World {
     }
     
     var sprites: [Billboard] {
-        let spritePlane = player.direction.orthogonal
-        return monsters.map { monster in
-            Billboard(
-                start: monster.position - spritePlane / 2,
-                direction: spritePlane,
-                length: 1,
-                texture: monster.animation.texture
-            )
-        }
+        let ray = Ray(origin: player.position, direction: player.direction)
+        return monsters.map { $0.billboard(for: ray) }
     }
     
     mutating func hurtPlayer(_ damage: Double) {
@@ -132,9 +127,47 @@ public extension World {
         let color = Color(r: 255, g: 0, b: 0, a: 191)   // 191 is 75% opacity (255 * 0.75)
         effects.append(Effect(type: .fadeIn, color: color, duration: 0.2))
         player.health -= damage
+        player.velocity = Vector(x: 0, y: 0)
         
         if player.isDead {
             effects.append(Effect(type: .fizzleOut, color: .red, duration: 2))
         }
+    }
+    
+    mutating func hurtMonster(at index: Int, damage: Double) {
+        var monster = monsters[index]
+        if monster.isDead {
+            return
+        }
+        
+        monster.health -= damage
+        monster.velocity = Vector(x: 0, y: 0)
+        if monster.isDead {
+            monster.state = .dead
+            monster.animation = .monsterDeath
+        } else {
+            monster.state = .hurt
+            monster.animation = .monsterHurt
+        }
+        monsters[index] = monster   // 最後にオブジェクトを更新する(structなので)
+    }
+    
+    func hitTest(_ ray: Ray) -> Int? {
+        let wallHit = map.hitTest(ray)
+        var distance = (wallHit - ray.origin).length
+        
+        var result: Int? = nil
+        for i in monsters.indices {
+            guard let hit = monsters[i].hitTest(ray) else {
+                continue
+            }
+            let hitDistance = (hit - ray.origin).length
+            guard hitDistance < distance else {
+                continue
+            }
+            result = i
+            distance = hitDistance
+        }
+        return result
     }
 }

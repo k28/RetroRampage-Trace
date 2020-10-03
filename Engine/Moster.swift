@@ -12,9 +12,12 @@ public enum MonsterState {
     case idle
     case chasing
     case sctatching
+    case hurt
+    case dead
 }
 
 public struct Monster: Actor {
+    public var health: Double = 50
     public let speed: Double = 0.5
     public let radius: Double = 0.4375
     public var position: Vector
@@ -31,6 +34,10 @@ public struct Monster: Actor {
 
 public extension Monster {
     
+    var isDead: Bool {
+        return health <= 0
+    }
+    
     /// 状態を更新する
     /// - Parameter world: World
     mutating func update(in world: inout World) {
@@ -40,17 +47,18 @@ public extension Monster {
                 state = .chasing
                 animation = .monsterWalk
             }
-            velocity = Vector(x: 0, y: 0)
         case .chasing:
             guard canSeePlayer(in: world) else {
                 state = .idle
                 animation = .monsterIdle
+                velocity = Vector(x: 0, y: 0)
                 break
             }
             if canReachPlayer(in: world) {
                 state = .sctatching
                 animation = .monsterScratch
                 lastAttackTime = -attackCooldown
+                velocity = Vector(x: 0, y: 0)
             }
             let direction = world.player.position - position
             velocity = direction * (speed / direction.length)
@@ -64,6 +72,17 @@ public extension Monster {
             if animation.time - lastAttackTime >= attackCooldown {
                 lastAttackTime = animation.time
                 world.hurtPlayer(10)
+            }
+            
+        case .hurt:
+            if animation.isCompleted {
+                state = .idle
+                animation = .monsterIdle
+            }
+            
+        case .dead:
+            if animation.isCompleted {
+                animation = .monsterDead
             }
         }
     }
@@ -84,6 +103,26 @@ public extension Monster {
         let playerDistance = (world.player.position - position).length
         return playerDistance - radius - world.player.radius < reach
     }
+    
+    func billboard(for ray: Ray) -> Billboard {
+        let plane = ray.direction.orthogonal
+        return Billboard(
+            start: position - plane / 2,
+            direction: plane,
+            length: 1,
+            texture: animation.texture)
+    }
+    
+    func hitTest(_ ray: Ray) -> Vector? {
+        guard isDead == false, let hit = billboard(for: ray).hitTest(ray) else {
+            return nil
+        }
+        // モンスターの半径に当たっているかチェックする
+        guard (hit - position).length < radius else {
+            return nil
+        }
+        return hit
+    }
 }
 
 // モンスターのアニメーションを定義
@@ -100,4 +139,7 @@ public extension Animation {
         .monsterScratch7,
         .monsterScratch8,
     ], duration: 0.8)
+    static let monsterHurt  = Animation(frames: [.monsterHurt], duration: 0.2)
+    static let monsterDeath = Animation(frames: [.monsterHurt, .monsterDeath1, .monsterDeath2], duration: 0.5)
+    static let monsterDead  = Animation(frames: [.monsterDead], duration: 0)
 }

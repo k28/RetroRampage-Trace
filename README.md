@@ -11,7 +11,8 @@
 - __done__ [Part5](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part5.md)
 - __done__ [Part6](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part6.md)
 - __done__ [Part7](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part7.md)
-- __here__ [Part8](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part8.md)
+- __done__ [Part8](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part8.md)
+- __here__ [Part9](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part9.md)
 
 
 <!-- vim:set ft=markdown ts=2 sw=2 sts=2: -->

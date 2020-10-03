@@ -14,11 +14,13 @@ private let joysticRadius: Double = 40
 class ViewController: UIViewController {
     private let imageView = UIImageView()
     private let panGesture = UIPanGestureRecognizer()
+    private let tapGesture = UITapGestureRecognizer()
     private var world = World(map: loadMap())
     private var lastFrameTime = CACurrentMediaTime()
     private let maximumTimeStep: Double = 1/20
     private let worldTimeStep: Double = 1/120
     private let textures = loadTextures()
+    private var lastFiredTime = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,12 @@ class ViewController: UIViewController {
         let displayLink = CADisplayLink(target: self, selector: #selector(update(_:)))
         displayLink.add(to: .main, forMode: .common)
         
+        panGesture.delegate = self
         view.addGestureRecognizer(panGesture)
+        view.addGestureRecognizer(tapGesture)
+
+        tapGesture.addTarget(self, action: #selector(fire(_:)))
+        tapGesture.delegate = self
     }
 
     func setUpImageView() {
@@ -48,7 +55,9 @@ class ViewController: UIViewController {
         let inputVector = self.inputVector
         let rotation = inputVector.x * world.player.turningSpeed * worldTimeStep
         let input = Input(speed: -inputVector.y,
-                          rotation: Rotation(sine: sin(rotation), cosine: cos(rotation)))
+                          rotation: Rotation(sine: sin(rotation), cosine: cos(rotation)),
+                          isFiring: lastFiredTime > lastFrameTime
+        )
         let worldSteps = (timeStep / worldTimeStep).rounded(.up)
         for _ in 0 ..< Int(worldSteps) {
             world.update(timeStep: timeStep / worldSteps, input: input)
@@ -78,6 +87,16 @@ class ViewController: UIViewController {
         default:
             return Vector(x: 0, y: 0)
         }
+    }
+    
+    @objc func fire(_ gestureRecognizer: UITapGestureRecognizer) {
+        lastFiredTime = CACurrentMediaTime()
+    }
+}
+
+extension ViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 

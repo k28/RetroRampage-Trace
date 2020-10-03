@@ -20,6 +20,11 @@ public struct Animation {
 }
 
 public extension Animation {
+    
+    var isCompleted: Bool {
+        return time >= duration
+    }
+    
     var texture: Texture {
         guard duration > 0 else {
             return frames[0]
@@ -28,5 +33,13 @@ public extension Animation {
         let t = time.truncatingRemainder(dividingBy: duration) / duration   // 不動小数点型の%の代わりのメソッド
         return frames[Int(Double(frames.count) * t)]
     }
+}
+
+public extension Animation {
+    static let pistolIdle = Animation(frames: [.pistol],
+                                      duration: 0)
+    
+    static let pistolFire = Animation(frames: [.pistolFire1, .pistolFire2, .pistolFire3, .pistolFire4],
+                                      duration: 0.5)
 }
 
