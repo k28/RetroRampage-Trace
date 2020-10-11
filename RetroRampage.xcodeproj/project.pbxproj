@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E527B659251FF2CB00A514FA /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E527B658251FF2CB00A514FA /* Effect.swift */; };
 		E527B65B25201B5400A514FA /* Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E527B65A25201B5400A514FA /* Easing.swift */; };
+		E5294ADC2532921600B58E3F /* RetroRampageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5294ADB2532921600B58E3F /* RetroRampageTests.swift */; };
 		E52CA75024EF2257008A8BF0 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA74F24EF2257008A8BF0 /* Renderer.swift */; };
 		E52CA75224F06B58008A8BF0 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75124F06B58008A8BF0 /* Vector.swift */; };
 		E52CA75424F06E0F008A8BF0 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52CA75324F06E0F008A8BF0 /* Player.swift */; };
@@ -40,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E5294ADE2532921600B58E3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5FBF66124EEB9EF00AAC46D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5FBF66824EEB9EF00AAC46D;
+			remoteInfo = RetroRampage;
+		};
 		E5FBF68A24EEBA2800AAC46D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5FBF66124EEB9EF00AAC46D /* Project object */;
@@ -66,6 +74,9 @@
 /* Begin PBXFileReference section */
 		E527B658251FF2CB00A514FA /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		E527B65A25201B5400A514FA /* Easing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Easing.swift; sourceTree = "<group>"; };
+		E5294AD92532921600B58E3F /* RetroRampageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RetroRampageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5294ADB2532921600B58E3F /* RetroRampageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroRampageTests.swift; sourceTree = "<group>"; };
+		E5294ADD2532921600B58E3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E52CA74F24EF2257008A8BF0 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		E52CA75124F06B58008A8BF0 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		E52CA75324F06E0F008A8BF0 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -99,6 +110,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E5294AD62532921600B58E3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5FBF66624EEB9EF00AAC46D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -117,11 +135,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5294ADA2532921600B58E3F /* RetroRampageTests */ = {
+			isa = PBXGroup;
+			children = (
+				E5294ADB2532921600B58E3F /* RetroRampageTests.swift */,
+				E5294ADD2532921600B58E3F /* Info.plist */,
+			);
+			path = RetroRampageTests;
+			sourceTree = "<group>";
+		};
 		E5FBF66024EEB9EF00AAC46D = {
 			isa = PBXGroup;
 			children = (
 				E5FBF66B24EEB9EF00AAC46D /* RetroRampage */,
 				E5FBF68624EEBA2800AAC46D /* Engine */,
+				E5294ADA2532921600B58E3F /* RetroRampageTests */,
 				E5FBF66A24EEB9EF00AAC46D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,6 +159,7 @@
 			children = (
 				E5FBF66924EEB9EF00AAC46D /* RetroRampage.app */,
 				E5FBF68524EEBA2800AAC46D /* Engine.framework */,
+				E5294AD92532921600B58E3F /* RetroRampageTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +221,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		E5294AD82532921600B58E3F /* RetroRampageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5294AE22532921600B58E3F /* Build configuration list for PBXNativeTarget "RetroRampageTests" */;
+			buildPhases = (
+				E5294AD52532921600B58E3F /* Sources */,
+				E5294AD62532921600B58E3F /* Frameworks */,
+				E5294AD72532921600B58E3F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5294ADF2532921600B58E3F /* PBXTargetDependency */,
+			);
+			name = RetroRampageTests;
+			productName = RetroRampageTests;
+			productReference = E5294AD92532921600B58E3F /* RetroRampageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E5FBF66824EEB9EF00AAC46D /* RetroRampage */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5FBF67D24EEB9EF00AAC46D /* Build configuration list for PBXNativeTarget "RetroRampage" */;
@@ -235,10 +282,14 @@
 		E5FBF66124EEB9EF00AAC46D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1160;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = K.Hatano;
 				TargetAttributes = {
+					E5294AD82532921600B58E3F = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = E5FBF66824EEB9EF00AAC46D;
+					};
 					E5FBF66824EEB9EF00AAC46D = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -263,11 +314,19 @@
 			targets = (
 				E5FBF66824EEB9EF00AAC46D /* RetroRampage */,
 				E5FBF68424EEBA2800AAC46D /* Engine */,
+				E5294AD82532921600B58E3F /* RetroRampageTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E5294AD72532921600B58E3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5FBF66724EEB9EF00AAC46D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,6 +348,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E5294AD52532921600B58E3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5294ADC2532921600B58E3F /* RetroRampageTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5FBF66524EEB9EF00AAC46D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -330,6 +397,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E5294ADF2532921600B58E3F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5FBF66824EEB9EF00AAC46D /* RetroRampage */;
+			targetProxy = E5294ADE2532921600B58E3F /* PBXContainerItemProxy */;
+		};
 		E5FBF68B24EEBA2800AAC46D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5FBF68424EEBA2800AAC46D /* Engine */;
@@ -357,6 +429,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E5294AE02532921600B58E3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 86W5YV4A4X;
+				INFOPLIST_FILE = RetroRampageTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.k28.RetroRampageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RetroRampage.app/RetroRampage";
+			};
+			name = Debug;
+		};
+		E5294AE12532921600B58E3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 86W5YV4A4X;
+				INFOPLIST_FILE = RetroRampageTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.k28.RetroRampageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RetroRampage.app/RetroRampage";
+			};
+			name = Release;
+		};
 		E5FBF67B24EEB9EF00AAC46D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -559,6 +675,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.k28.Engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_DISABLE_SAFETY_CHECKS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -569,6 +686,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E5294AE22532921600B58E3F /* Build configuration list for PBXNativeTarget "RetroRampageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5294AE02532921600B58E3F /* Debug */,
+				E5294AE12532921600B58E3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E5FBF66424EEB9EF00AAC46D /* Build configuration list for PBXProject "RetroRampage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

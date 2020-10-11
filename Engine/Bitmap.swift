@@ -10,25 +10,23 @@ import Foundation
 
 public struct Bitmap {
     public private(set) var pixcels: [Color]
-    public let width: Int
+    public let width, height: Int
+    public let isOpaque: Bool
     
-    public init(width: Int, pixcels: [Color]) {
-        self.width = width
+    public init(height: Int, pixcels: [Color]) {
+        self.height = height
+        self.width = pixcels.count / height
         self.pixcels = pixcels
+        self.isOpaque = pixcels.allSatisfy { $0.isOpaque }
     }
 }
 
 public extension Bitmap {
-    var height: Int {
-        return pixcels.count / width
-    }
-    
     subscript(x: Int, y: Int) -> Color {
-        get { return pixcels[y * width + x] }
+        get { return pixcels[x * height + y] }
         set {
             guard x >= 0, y >= 0, x < width, y < height else { return }
-            pixcels[y * width + x] = newValue
-            
+            pixcels[x * height + y] = newValue
         }
     }
     
@@ -38,12 +36,14 @@ public extension Bitmap {
     
     init(width: Int, height: Int, color: Color) {
         self.pixcels = Array(repeating: color, count: width * height)
+        self.height = height
         self.width = width
+        self.isOpaque = color.isOpaque
     }
     
     mutating func fill(rect: Rect, color: Color) {
-        for y in Int(rect.min.y) ..< Int(rect.max.y) {
-            for x in Int(rect.min.x) ..< Int(rect.max.x) {
+        for x in Int(rect.min.x) ..< Int(rect.max.x) {
+            for y in Int(rect.min.y) ..< Int(rect.max.y) {
                 self[x, y] = color
             }
         }
@@ -73,11 +73,21 @@ public extension Bitmap {
     mutating func drawColumn(_ sourceX: Int, of source: Bitmap, at point: Vector, height: Double) {
         let start = Int(point.y), end = Int((point.y + height).rounded(.up))
         let stepY = Double(source.height) / height
-        for y in max(0, start) ..< min(self.height, end) {
-            let sourceY = max(0, Double(y) - point.y) * stepY
-            let sourceColor = source[sourceX, Int(sourceY)]
-            // 色を混ぜて描画する
-            blendPixcel(at: Int(point.x), y, with: sourceColor)
+        
+        let offset = Int(point.x) * self.height
+        if source.isOpaque {
+            for y in max(0, start) ..< min(self.height, end) {
+                let sourceY = max(0, Double(y) - point.y) * stepY
+                let sourceColor = source[sourceX, Int(sourceY)]
+                pixcels[offset + y] = sourceColor
+            }
+        } else {
+            for y in max(0, start) ..< min(self.height, end) {
+                let sourceY = max(0, Double(y) - point.y) * stepY
+                let sourceColor = source[sourceX, Int(sourceY)]
+                // 色を混ぜて描画する
+                blendPixcel(at: offset + y, with: sourceColor)
+            }
         }
     }
     
@@ -91,14 +101,21 @@ public extension Bitmap {
         }
     }
     
-    private mutating func blendPixcel(at x: Int, _ y: Int, with newColor: Color) {
-        let oldColor = self[x, y]
-        let inverseAlpha = 1 - Double(newColor.a) / 255
-        self[x, y] = Color(
-            r: UInt8(Double(oldColor.r) * inverseAlpha) + newColor.r,
-            g: UInt8(Double(oldColor.g) * inverseAlpha) + newColor.g,
-            b: UInt8(Double(oldColor.b) * inverseAlpha) + newColor.b
-        )
+    private mutating func blendPixcel(at index: Int, with newColor: Color) {
+        switch newColor.a {
+        case 0:
+            break
+        case 255:
+            pixcels[index] = newColor
+        default:
+            let oldColor = pixcels[index]
+            let inverseAlpha = 1 - Double(newColor.a) / 255
+            pixcels[index] = Color(
+                r: UInt8(Double(oldColor.r) * inverseAlpha) + newColor.r,
+                g: UInt8(Double(oldColor.g) * inverseAlpha) + newColor.g,
+                b: UInt8(Double(oldColor.b) * inverseAlpha) + newColor.b
+            )
+        }
     }
     
     mutating func tint(with color: Color, opacity: Double) {
@@ -109,10 +126,8 @@ public extension Bitmap {
             b: UInt8(opacity * Double(color.b)),
             a: UInt8(opacity * 255)
         )
-        for y in 0 ..< height {
-            for x in 0 ..< width {
-                blendPixcel(at: x, y, with: color)
-            }
+        for i in pixcels.indices {
+            blendPixcel(at: i, with: color)
         }
     }
 }

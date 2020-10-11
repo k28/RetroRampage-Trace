@@ -13,16 +13,16 @@ extension UIImage {
     convenience init?(bitmap: Bitmap) {
         let alphaInfo = CGImageAlphaInfo.premultipliedLast
         let bytesPerPixcel = MemoryLayout<Color>.size
-        let bytesPerRow = bitmap.width * bytesPerPixcel
+        let bytesPerRow = bitmap.height * bytesPerPixcel
         
-        let data = Data(bytes: bitmap.pixcels, count: bitmap.height * bytesPerRow)
+        let data = Data(bytes: bitmap.pixcels, count: bitmap.width * bytesPerRow)
         guard let providerRef = CGDataProvider(data: data as CFData) else {
             return nil
         }
         
         guard let cgImage = CGImage(
-            width: bitmap.width,
-            height: bitmap.height,
+            width: bitmap.height,
+            height: bitmap.width,
             bitsPerComponent: 8,
             bitsPerPixel: bytesPerPixcel * 8,
             bytesPerRow: bytesPerRow,
@@ -36,7 +36,7 @@ extension UIImage {
                 return nil
         }
         
-        self.init(cgImage: cgImage)        
+        self.init(cgImage: cgImage, scale: 1, orientation: .leftMirrored)
     }
 }
 
@@ -48,12 +48,12 @@ extension Bitmap {
         
         let alphaInfo = CGImageAlphaInfo.premultipliedLast
         let bytesPerPixcel = MemoryLayout<Color>.size
-        let bytesPerRow = cgImage.width * bytesPerPixcel
+        let bytesPerRow = cgImage.height * bytesPerPixcel
         
         var pixcels = [Color](repeating: .clear, count: cgImage.width * cgImage.height)
         guard let context = CGContext(data: &pixcels,
-                                      width: cgImage.width,
-                                      height: cgImage.height,
+                                      width: cgImage.height,
+                                      height: cgImage.width,
                                       bitsPerComponent: 8,
                                       bytesPerRow: bytesPerRow,
                                       space: CGColorSpaceCreateDeviceRGB(),
@@ -62,7 +62,10 @@ extension Bitmap {
                 return nil
         }
         
-        context.draw(cgImage, in: CGRect(origin: .zero, size: image.size))
-        self.init(width: cgImage.width, pixcels: pixcels)
+        UIGraphicsPushContext(context)
+        // context.draw(cgImage, in: CGRect(origin: .zero, size: image.size))
+        UIImage(cgImage: cgImage, scale: 1, orientation: .left).draw(at: .zero)
+        UIGraphicsPopContext()
+        self.init(height: cgImage.height, pixcels: pixcels)
     }
 }
