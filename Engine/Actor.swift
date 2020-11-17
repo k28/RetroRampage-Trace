@@ -37,6 +37,22 @@ public extension Actor {
         return largestIntersection
     }
     
+    func intersection(with door: Door) -> Vector? {
+        return rect.intersection(with: door.rect)
+    }
+    
+    func intersection(with world: World) -> Vector? {
+        if let intersection = intersection(with: world.map) {
+            return intersection
+        }
+        for door in world.doors {
+            if let intersection = intersection(with: door) {
+                return intersection
+            }
+        }
+        return nil
+    }
+    
     func intersection(with actor: Actor) -> Vector? {
         if isDead || actor.isDead {
             return nil

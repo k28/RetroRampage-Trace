@@ -11,12 +11,14 @@ import Foundation
 /// ゲームの世界を管理するクラス
 public struct World {
     public let map: Tilemap
+    public private(set) var doors: [Door]
     public private(set) var player: Player!
     public private(set) var monsters: [Monster]
     public private(set) var effects: [Effect]
     
     public init(map: Tilemap) {
         self.map = map
+        self.doors = []
         self.monsters = []
         self.effects = []
         // オブジェクトの位置を初期化
@@ -44,6 +46,10 @@ public extension World {
                     self.player = Player(position: position)
                 case .monster:
                     self.monsters.append(Monster(position: position))
+                case .door:
+                    precondition(y > 0 && y < map.height, "Door cannot be placed on map edge")
+                    let isVertical = map[x, y - 1].isWall && map[x, y + 1].isWall
+                    self.doors.append(Door(position: position, isVertical: isVertical))
                 }
             }
         }
@@ -102,21 +108,21 @@ public extension World {
             }
             
             // Monsterが壁にめり込まないようにする
-            while let intersection = monster.intersection(with: map) {
+            while let intersection = monster.intersection(with: self) {
                 monster.position -= intersection
             }
             
             monsters[i] = monster
         }
 
-        while let intersection = player.intersection(with: map) {
+        while let intersection = player.intersection(with: self) {
             player.position -= intersection
         }
     }
     
     var sprites: [Billboard] {
         let ray = Ray(origin: player.position, direction: player.direction)
-        return monsters.map { $0.billboard(for: ray) }
+        return monsters.map { $0.billboard(for: ray) } + doors.map { $0.billboard }
     }
     
     mutating func hurtPlayer(_ damage: Double) {
@@ -152,8 +158,25 @@ public extension World {
         monsters[index] = monster   // 最後にオブジェクトを更新する(structなので)
     }
     
-    func hitTest(_ ray: Ray) -> Int? {
-        let wallHit = map.hitTest(ray)
+    func hitTest(_ ray: Ray) -> Vector {
+        var wallHit = map.hitTest(ray)
+        var distance = (wallHit - ray.origin).length
+        for door in doors {
+            guard let hit = door.hitTest(ray) else {
+                continue
+            }
+            let hitDistance = (hit - ray.origin).length
+            guard hitDistance < distance else {
+                continue
+            }
+            wallHit = hit
+            distance = hitDistance
+        }
+        return wallHit
+    }
+    
+    func pickMoster(_ ray: Ray) -> Int? {
+        let wallHit = hitTest(ray)
         var distance = (wallHit - ray.origin).length
         
         var result: Int? = nil
