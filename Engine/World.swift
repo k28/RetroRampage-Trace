@@ -91,6 +91,14 @@ public extension World {
             monster.position += monster.velocity * timeStep
             monsters[i] = monster
         }
+        
+        // Update doors
+        for i in 0 ..< doors.count {
+            var door = doors[i]
+            door.time += timeStep
+            door.update(in: &self)
+            doors[i] = door
+        }
 
         // Handle collisions
         for i in monsters.indices {
@@ -108,16 +116,12 @@ public extension World {
             }
             
             // Monsterが壁にめり込まないようにする
-            while let intersection = monster.intersection(with: self) {
-                monster.position -= intersection
-            }
+            monster.avoidWalls(in: self)
             
             monsters[i] = monster
         }
 
-        while let intersection = player.intersection(with: self) {
-            player.position -= intersection
-        }
+        player.avoidWalls(in: self)
     }
     
     var sprites: [Billboard] {
@@ -192,5 +196,9 @@ public extension World {
             distance = hitDistance
         }
         return result
+    }
+    
+    func isDoor(at x: Int, _ y: Int) -> Bool {
+        return map.things[y * map.width + x] == .door
     }
 }

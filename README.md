@@ -13,8 +13,9 @@
 - __done__ [Part7](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part7.md)
 - __done__ [Part8](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part8.md)
 - __done__ [Part9](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part9.md)
-- __here__ [Part10](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part10.md)
-  - __here__ Open Sesame
+- __done__ [Part10](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part10.md)
+  - ドアに挟まれると身動きが取れなくなる...のが面白い(Door Jam)
+- __here__ [Part11](https://github.com/nicklockwood/RetroRampage/blob/master/Tutorial/Part11.md)
 
 
 <!-- vim:set ft=markdown ts=2 sw=2 sts=2: -->
